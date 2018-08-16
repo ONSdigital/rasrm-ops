@@ -2,6 +2,7 @@ import requests
 from flask import Blueprint, render_template, url_for, current_app as app, request
 from werkzeug.utils import redirect
 
+from app.auth import auth
 from app.views.timestamp import convert_to_iso_timestamp
 
 blueprint = Blueprint('action_plan', __name__, template_folder='templates')
@@ -22,6 +23,7 @@ action_types = [
 ]
 
 
+@auth.login_required
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/actions', methods=["GET"])
 def get_action_plan(survey_id, collection_exercise_id):
     response = requests.get(f'{app.config["ACTION_SERVICE"]}/actionplans',

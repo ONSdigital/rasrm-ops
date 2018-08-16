@@ -8,8 +8,8 @@ flask = "*"
 requests = "*"
 tzlocal = "*"
 requests-mock = "*"
-flask-basicauth = "*"
 gunicorn = "*"
+flask-httpauth = "*"
 
 [dev-packages]
 pytest = "*"

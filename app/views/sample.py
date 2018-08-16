@@ -3,15 +3,19 @@ from flask import Blueprint, render_template, url_for, request, current_app as a
 from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
+from app.auth import auth
+
 blueprint = Blueprint('sample', __name__, template_folder='templates')
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/sample', methods=["GET"])
+@auth.login_required
 def get_sample(survey_id, collection_exercise_id):
     return render_template('sample.html')
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/sample', methods=["POST"])
+@auth.login_required
 def upload_sample(survey_id, collection_exercise_id):
     # Check if collection exercise valid?
     if 'sample' not in request.files:

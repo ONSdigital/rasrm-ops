@@ -5,6 +5,8 @@ from flask import render_template, Blueprint, url_for, request, current_app as a
 from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
+from app.auth import auth
+
 blueprint = Blueprint('ci', __name__, template_folder='templates')
 
 
@@ -17,6 +19,7 @@ def get_ci(survey_id, collection_exercise_id):
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/ci', methods=["POST"])
+@auth.login_required
 def create_ci(survey_id, collection_exercise_id):
     ci_classifiers = {k.lower(): v for k, v in request.form.items() if k != 'ci_upload'}
     for value in ci_classifiers.values():
