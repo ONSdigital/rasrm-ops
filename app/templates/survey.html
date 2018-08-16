@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block main %}
+<div>
+        {% for item in collection_exercises %}
+        <a href="/survey/{{ survey_id }}/collection/{{ item.id }}">{{ item.userDescription }}</a><br>
+        {% endfor %}
+</div><br>
+<div>
+    <a href="/survey/{{ survey_id }}/classifiers">Create Classifiers</a>
+</div>
+<form>
+    <label for="period">Period</label>
+    <input type="number" id="period" name="period"><br>
+    <label for="period_description">Period Description</label>
+    <input type="text" id="period_description" name="period_description"><br>
+    <input type="submit" value="Create a collection exercise" formmethod="post">
+</form>
+{% endblock %}

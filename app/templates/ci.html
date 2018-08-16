@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block main %}
+<form action="ci">
+    {% for key, value in ci_classifiers.items() %}
+    <label for="{{ key }}">{{ key }}</label>
+    <input type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
+    {% endfor %}
+    <input type="submit" formmethod="post" name="ci_upload" value="Load collection instrument">
+</form>
+{% endblock %}

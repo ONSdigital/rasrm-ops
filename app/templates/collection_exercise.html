@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div>
+    <h2>{{ collection_exercise.userDescription }}</h2>
+    <label for="state">State</label>
+    <label id="state">{{ collection_exercise.state }}</label><br>
+
+    {% for item in events %}
+    <label for="{{ item.tag }}">{{ item.tag }}</label>
+    <label id="{{ item.tag }}">{{ item.timestamp }}</label><br>
+    {% endfor %}
+</div>
+
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}/event">Load event</a><br>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}/ci">Load collection instrument</a><br>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}/sample">Load sample</a><br>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}/actions">Load action plans</a><br>
+<form>
+    <input type="submit" formmethod="post" name="execute" value="Execute collection exercise" {% if not executable %}disabled{% endif %}>
+</form>
+{% endblock %}

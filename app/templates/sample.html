@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block main %}
+<form enctype="multipart/form-data">
+    <input type="file" name="sample" accept=".csv">
+    <input type="submit" formmethod="post" name="sample_upload" value="Load sample">
+</form>
+{% endblock %}

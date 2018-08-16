@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block main %}
+<form>
+    <label for="event">Events</label>
+    <select id="event" name="event">
+        {% for item in events %}
+        <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select><br>
+    <label for="event_date">Date</label>
+    <input type="datetime-local" id="event_date" name="event_date"><br>
+    <input type="submit" value="Submit" formmethod="post">
+</form>
+{% endblock %}

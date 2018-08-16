@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block main %}
+<form>
+    <label for="classifier_type">Classifier</label>
+    <select id="classifier_type" name="classifier_type">
+        {% for item in classifier_types %}
+        <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select><br>
+    {% for item in classifiers %}
+    <label for="{{ item }}">{{ item }}</label>
+    <input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}"><br>
+    {% endfor %}
+    <input type="submit" value="Submit" formmethod="post">
+</form>
+{% endblock %}
