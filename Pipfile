@@ -9,6 +9,7 @@ requests = "*"
 tzlocal = "*"
 requests-mock = "*"
 flask-basicauth = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
