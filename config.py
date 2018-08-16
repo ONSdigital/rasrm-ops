@@ -1,3 +1,4 @@
+import json
 import os
 
 
@@ -7,12 +8,17 @@ def env_path(environment):
     return f"-{environment}"
 
 
+def get_space():
+    vcap = os.getenv('VCAP_APPLICATION')
+    return json.loads(vcap)['space_name']
+
+
 class Config:
     SERVICE_DOMAIN_SUFFIX = os.getenv("SERVICE_DOMAIN_SUFFIX")
     USERNAME = os.getenv("USERNAME")
     PASSWORD = os.getenv("PASSWORD")
     BASIC_AUTH = (USERNAME, PASSWORD)
-    ENVIRONMENT = os.getenv("SPACE")
+    ENVIRONMENT = get_space()
 
     ACTION_SERVICE = f"http://actionsvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
     COLLECTION_EXERCISE_SERVICE = f"http://collectionexercisesvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
@@ -26,11 +32,11 @@ class CIConfig(Config):
     USERNAME = os.getenv("USERNAME")
     PASSWORD = os.getenv("PASSWORD")
     BASIC_AUTH = (USERNAME, PASSWORD)
-    ENVIRONMENT = os.getenv("SPACE")
+    ENVIRONMENT = get_space()
 
-    ACTION_SERVICE = f"http://rm-action-exercise-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
-    COLLECTION_EXERCISE_SERVICE = f"http://rm-collection-exercise-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
-    COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-insrument-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+    ACTION_SERVICE = f"http://rm-action-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+    COLLECTION_EXERCISE_SERVICE = f"http://rm-collection-exercise-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+    COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
     SAMPLE_SERVICE = f"http://rm-sample-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
     SURVEY_SERVICE = f"http://rm-survey-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
 

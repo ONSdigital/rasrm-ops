@@ -9,6 +9,12 @@ from app.auth import auth
 blueprint = Blueprint('surveys', __name__, template_folder='templates')
 
 
+@blueprint.route('/', methods=["GET"])
+@auth.login_required
+def index():
+    return redirect(url_for('surveys.get_survey'))
+
+
 @blueprint.route('/survey', methods=["GET"])
 @auth.login_required
 def get_survey():
