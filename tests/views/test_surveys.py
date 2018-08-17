@@ -28,9 +28,7 @@ def test_get_surveys_no_surveys(client, requests_mock):
 
 
 def test_create_survey(client, requests_mock):
-    expected_survey = {'survey_ref': 22, 'shortName': "BRES", 'longName': "BRE survey", 'legalBasisRef': "Vol",
-                       'surveyType': "Social"}
-    requests_mock.post(f"{client.application.config['SURVEY_SERVICE']}/surveys", json=expected_survey)
+    requests_mock.post(f"{client.application.config['SURVEY_SERVICE']}/surveys")
     survey = {
         'survey_ref': 22,
         'short_name': "BRES",
@@ -55,3 +53,33 @@ def test_create_survey_missing_fields(client):
     response = client.post('/survey', data=survey)
 
     assert response.status_code == 400
+
+
+def test_create_survey_fails(client, requests_mock):
+    requests_mock.post(f"{client.application.config['SURVEY_SERVICE']}/surveys", status_code=500)
+    survey = {
+        'survey_ref': 22,
+        'short_name': "BRES",
+        'long_name': "BRE survey",
+        'legal_basis': "Vol",
+        'survey_type': "Social"
+    }
+
+    response = client.post('/survey', data=survey)
+
+    assert response.status_code == 500
+
+
+def test_create_survey_conflict(client, requests_mock):
+    requests_mock.post(f"{client.application.config['SURVEY_SERVICE']}/surveys", status_code=409)
+    survey = {
+        'survey_ref': 22,
+        'short_name': "BRES",
+        'long_name': "BRE survey",
+        'legal_basis': "Vol",
+        'survey_type': "Social"
+    }
+
+    response = client.post('/survey', data=survey)
+
+    assert response.status_code == 409

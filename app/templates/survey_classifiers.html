@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Create Survey Classifiers for {{ survey.shortName }}</h1>
+<p>This will create survey classifiers. Survey classifiers define what properties should be used to determine the
+    collection instrument or template to use</p>
 <form>
     <label for="classifier_type">Classifier</label>
     <select id="classifier_type" name="classifier_type">
@@ -13,4 +16,5 @@
     {% endfor %}
     <input type="submit" value="Submit" formmethod="post">
 </form>
+<a href="/survey/{{ survey_id }}">Back</a>
 {% endblock %}

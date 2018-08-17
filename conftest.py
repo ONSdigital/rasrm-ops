@@ -1,9 +1,8 @@
-import base64
-
 import pytest
 from requests.auth import _basic_auth_str
 
 from app import create_app
+
 
 @pytest.fixture
 def client():

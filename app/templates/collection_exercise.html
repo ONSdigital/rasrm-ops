@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block main %}
-
 <div>
     <h2>{{ collection_exercise.userDescription }}</h2>
     <label for="state">State</label>
@@ -19,4 +18,5 @@
 <form>
     <input type="submit" formmethod="post" name="execute" value="Execute collection exercise" {% if not executable %}disabled{% endif %}>
 </form>
+<a href="/survey/{{ survey_id }}">Back</a>
 {% endblock %}

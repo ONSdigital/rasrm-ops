@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Create collection exercise events for {{ collection_exercise.userDescription }}</h1>
+<p>Create events for a collection exercise. Mandatory events are: mps, go_live, return_by, exercise_end</p>
 <form>
     <label for="event">Events</label>
     <select id="event" name="event">
@@ -11,4 +13,5 @@
     <input type="datetime-local" id="event_date" name="event_date"><br>
     <input type="submit" value="Submit" formmethod="post">
 </form>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
 {% endblock %}

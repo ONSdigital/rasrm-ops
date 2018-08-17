@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Surveys</h1>
+<p>This is a list of the surveys that have already been created</p>
 <div>
         {% for item in surveys %}
         <a href="/survey/{{ item.id }}">{{ item.longName }}</a><br>
         {% endfor %}
 </div><br>
+<h2>Create a survey</h2>
 <form action="/survey">
     <label for="survey_ref">Survey Ref</label>
     <input type="number" id="survey_ref" name="survey_ref"><br>
@@ -25,5 +28,5 @@
         {% endfor %}
     </select><br>
     <input type="submit" value="Submit" formmethod="post">
-</form>
+</form><br>
 {% endblock %}

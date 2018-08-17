@@ -10,6 +10,7 @@ tzlocal = "*"
 requests-mock = "*"
 gunicorn = "*"
 flask-httpauth = "*"
+cfenv = "*"
 
 [dev-packages]
 pytest = "*"

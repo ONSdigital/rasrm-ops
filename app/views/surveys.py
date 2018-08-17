@@ -2,6 +2,7 @@ import requests
 from flask import Blueprint, render_template, url_for, request
 
 from flask import current_app as app
+from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
@@ -33,6 +34,8 @@ def create_survey():
         'surveyType': request.form['survey_type']
     }
     response = requests.post(f"{app.config['SURVEY_SERVICE']}/surveys", auth=app.config['BASIC_AUTH'], json=survey)
+    if response.status_code == 409:
+        abort(409)
     response.raise_for_status()
     return redirect(url_for('surveys.get_survey'))
 

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Create action rules for {{ collection_exercise.userDescription }}</h1>
+<p>Create action rules.</p>
 <form>
     <label for="action_plan_id">Action plan</label>
     <select id="action_plan_id" name="action_plan_id">
@@ -23,4 +25,5 @@
     <input type="datetime-local" id="timestamp" name="timestamp"><br>
     <input type="submit" formmethod="post" value="Create action rule">
 </form>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
 {% endblock %}

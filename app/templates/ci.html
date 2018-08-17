@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Create ci for {{ collection_exercise.userDescription }}</h1>
+<p>Select the values for this collection instrument. All values must be populated</p>
 <form action="ci">
     {% for key, value in ci_classifiers.items() %}
     <label for="{{ key }}">{{ key }}</label>
@@ -7,4 +9,5 @@
     {% endfor %}
     <input type="submit" formmethod="post" name="ci_upload" value="Load collection instrument">
 </form>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
 {% endblock %}

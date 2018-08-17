@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7ae405d7a3f69bb54b6ef4c45146f76ea2d6fd6bb12a74b44f38f7787686bca2"
+            "sha256": "8e7ebc5234a7b420b690bc4f8cdd375ead8dd8d1c4eeb0cba9ebffb891b2ed74"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,6 +22,14 @@
                 "sha256:b6e8b28b2b7e771a41ecdd12d4d43262ecab52adebbafa42c77d6b57fb6ad3a4"
             ],
             "version": "==2018.8.13"
+        },
+        "cfenv": {
+            "hashes": [
+                "sha256:7815bffcc4a3db350f92517157fafc577c11b5a7ff172dc5632f1042b93073e8",
+                "sha256:c7a91a4c82431acfc35db664c194d5e6cc7f4df3dcb692d0f836a6ceb0156167"
+            ],
+            "index": "pypi",
+            "version": "==0.5.3"
         },
         "chardet": {
             "hashes": [
@@ -52,6 +60,12 @@
             ],
             "index": "pypi",
             "version": "==3.2.4"
+        },
+        "furl": {
+            "hashes": [
+                "sha256:5436226c89536b5fa8c5faa1e34d684d417f69dea91d406edaab102c5da6de8c"
+            ],
+            "version": "==1.2"
         },
         "gunicorn": {
             "hashes": [
@@ -84,6 +98,12 @@
         "markupsafe": {
             "hashes": [
                 "sha256:a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665"
+            ],
+            "version": "==1.0"
+        },
+        "orderedmultidict": {
+            "hashes": [
+                "sha256:b89895ba6438038d0bdf88020ceff876cf3eae0d5c66a69b526fab31125db2c5"
             ],
             "version": "==1.0"
         },

@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>Upload a sample for {{ collection_exercise.userDescription }}</h1>
+<p>Upload a sample for the collection exercise. Invalid samples will not be displayed here</p>
 <form enctype="multipart/form-data">
     <input type="file" name="sample" accept=".csv">
     <input type="submit" formmethod="post" name="sample_upload" value="Load sample">
 </form>
+<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
 {% endblock %}

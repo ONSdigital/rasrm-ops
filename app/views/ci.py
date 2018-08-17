@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
+from app.views.collection_exercise import get_collection_exercise
 
 blueprint = Blueprint('ci', __name__, template_folder='templates')
 
@@ -15,17 +16,20 @@ def get_ci(survey_id, collection_exercise_id):
     classifiers = get_ci_classifiers(survey_id)
     if 'COLLECTION_EXERCISE' in classifiers:
         classifiers['COLLECTION_EXERCISE'] = collection_exercise_id
-    return render_template('ci.html', ci_classifiers=classifiers)
+    collection_exercise = get_collection_exercise(collection_exercise_id)
+    return render_template('ci.html', ci_classifiers=classifiers, collection_exercise=collection_exercise,
+                           survey_id=survey_id, collection_exercise_id=collection_exercise_id)
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/ci', methods=["POST"])
 @auth.login_required
 def create_ci(survey_id, collection_exercise_id):
-    ci_classifiers = {k.lower(): v for k, v in request.form.items() if k != 'ci_upload'}
-    for value in ci_classifiers.values():
-        if not value:
+    form_classifiers = {k.lower(): v for k, v in request.form.items() if k != 'ci_upload'}
+    survey_classifiers = get_ci_classifiers(survey_id)
+    for key in survey_classifiers.keys():
+        if key.lower() not in form_classifiers or not form_classifiers[key.lower()]:
             abort(400)
-    upload_eq_ci(survey_id, ci_classifiers)
+    upload_eq_ci(survey_id, form_classifiers)
     link_cis(collection_exercise_id)
     return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
                             collection_exercise_id=collection_exercise_id))

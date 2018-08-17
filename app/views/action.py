@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, url_for, current_app as app, reque
 from werkzeug.utils import redirect
 
 from app.auth import auth
+from app.views.collection_exercise import get_collection_exercise
 from app.views.timestamp import convert_to_iso_timestamp
 
 blueprint = Blueprint('action_plan', __name__, template_folder='templates')
@@ -31,7 +32,10 @@ def get_action_plan(survey_id, collection_exercise_id):
     response.raise_for_status()
     plans = [plan for plan in response.json() if
              plan_for_collection_exercise(plan, collection_exercise_id)]
-    return render_template('action.html', plans=plans, action_types=action_types)
+    collection_exercise = get_collection_exercise(collection_exercise_id)
+    return render_template('action.html', plans=plans, action_types=action_types,
+                           collection_exercise=collection_exercise, survey_id=survey_id,
+                           collection_exercise_id=collection_exercise_id)
 
 
 def plan_for_collection_exercise(plan, collection_exercise_id):

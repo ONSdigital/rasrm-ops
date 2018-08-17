@@ -1,5 +1,6 @@
 import requests
 from flask import Blueprint, render_template, url_for, current_app as app
+from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
@@ -21,6 +22,10 @@ def load_collection_exercise(survey_id, collection_exercise_id):
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>', methods=["POST"])
 @auth.login_required
 def execute_collection_exercise(survey_id, collection_exercise_id):
+    collection_exercise = get_collection_exercise(collection_exercise_id)
+    if collection_exercise['state'] != 'READY_TO_REVIEW':
+        abort(400)
+
     execute_response = requests.post(f"{app.config['COLLECTION_EXERCISE_SERVICE']}/collectionexerciseexecution/"
                                      f"{collection_exercise_id}",
                                      auth=app.config['BASIC_AUTH'])
