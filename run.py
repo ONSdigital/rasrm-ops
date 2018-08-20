@@ -1,5 +1,7 @@
+from config import DevConfig
+
 if __name__ == '__main__':
     from app import create_app
 
     app = create_app()
-    app.run()
+    app.run(port=DevConfig.PORT)

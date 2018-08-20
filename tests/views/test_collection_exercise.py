@@ -43,4 +43,3 @@ def test_execute_collection_exercise_not_executable(client, requests_mock):
     response = client.post('/survey/BRES/collection/123')
 
     assert response.status_code == 400
-

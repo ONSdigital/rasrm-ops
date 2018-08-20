@@ -39,6 +39,7 @@ class CIConfig(Config):
 
 
 class DevConfig(Config):
+    PORT = 8003
     USERNAME = "admin"
     PASSWORD = "secret"
     BASIC_AUTH = ("admin", "secret")
