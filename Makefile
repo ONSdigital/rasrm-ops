@@ -13,3 +13,6 @@ start:
 
 docker: test
 	docker build -t sdcplatform/rasrm-ops:latest .
+
+docker-run: docker
+	docker run --network=rasrmdockerdev_default  -p 8003:8003 sdcplatform/rasrm-ops:latest

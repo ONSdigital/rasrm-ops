@@ -1,5 +1,7 @@
 FROM python:3.6
 
+ENV APP_SETTINGS=DockerConfig
+
 WORKDIR /app
 COPY . /app
 EXPOSE 8003

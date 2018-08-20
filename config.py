@@ -48,3 +48,11 @@ class DevConfig(Config):
     COLLECTION_INSTRUMENT_SERVICE = 'http://localhost:8002'
     SAMPLE_SERVICE = 'http://localhost:8125'
     SURVEY_SERVICE = 'http://localhost:8080'
+
+
+class DockerConfig(DevConfig):
+    ACTION_SERVICE = 'http://action:8151'
+    COLLECTION_EXERCISE_SERVICE = 'http://collex:8145'
+    COLLECTION_INSTRUMENT_SERVICE = 'http://collection-instrument:8002'
+    SAMPLE_SERVICE = 'http://sample:8125'
+    SURVEY_SERVICE = 'http://survey:8080'
