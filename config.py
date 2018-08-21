@@ -1,7 +1,5 @@
-import json
-import os
-
 import cfenv
+import os
 
 cf_env = cfenv.AppEnv()
 
@@ -13,6 +11,7 @@ def env_path(environment):
 
 
 class Config:
+    PORT = os.getenv('PORT')  # This is not used in run.py which isn't used in cloudfoundry
     SERVICE_DOMAIN_SUFFIX = os.getenv("SERVICE_DOMAIN_SUFFIX")
     USERNAME = os.getenv("USERNAME")
     PASSWORD = os.getenv("PASSWORD")
@@ -22,7 +21,8 @@ class Config:
         ENVIRONMENT = cf_env.space
         ACTION_SERVICE = f"http://actionsvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
         COLLECTION_EXERCISE_SERVICE = f"http://collectionexercisesvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
-        COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
+        COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument{env_path(ENVIRONMENT)}." \
+                                        f"{SERVICE_DOMAIN_SUFFIX}"
         SAMPLE_SERVICE = f"http://samplesvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
         SURVEY_SERVICE = f"http://surveysvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
 
