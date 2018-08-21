@@ -38,8 +38,8 @@ class CIConfig(Config):
         SURVEY_SERVICE = f"http://rm-survey-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
 
 
-class DevConfig(Config):
-    PORT = 8003
+class DevelopmentConfig(Config):
+    PORT = os.getenv("PORT", 8003)
     USERNAME = "admin"
     PASSWORD = "secret"
     BASIC_AUTH = ("admin", "secret")
@@ -50,7 +50,8 @@ class DevConfig(Config):
     SURVEY_SERVICE = 'http://localhost:8080'
 
 
-class DockerConfig(DevConfig):
+class DockerConfig(DevelopmentConfig):
+    PORT = 80
     ACTION_SERVICE = 'http://action:8151'
     COLLECTION_EXERCISE_SERVICE = 'http://collex:8145'
     COLLECTION_INSTRUMENT_SERVICE = 'http://collection-instrument:8002'

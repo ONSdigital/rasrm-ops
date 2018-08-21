@@ -48,8 +48,3 @@ def get_collection_exercise(collection_exercise_id):
         auth=app.config['BASIC_AUTH'])
     response.raise_for_status()
     return response.json()
-
-
-def execute_collection_exercise(survey_id, collection_exercise_id):
-    return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
-                            collection_exercise_id=collection_exercise_id))

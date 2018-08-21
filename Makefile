@@ -2,8 +2,8 @@ build:
 	pipenv install --dev
 
 lint:
-	pipenv run flake8 ./response_operations_ui ./tests
-	pipenv check ./response_operations_ui ./tests
+	pipenv run flake8 ./app ./tests
+	pipenv check ./app ./tests
 
 test: lint
 	pipenv run pytest
@@ -15,4 +15,4 @@ docker: test
 	docker build -t sdcplatform/rasrm-ops:latest .
 
 docker-run: docker
-	docker run --network=rasrmdockerdev_default  -p 8003:8003 sdcplatform/rasrm-ops:latest
+	docker run --network=rasrmdockerdev_default  -p 8003:80 sdcplatform/rasrm-ops:latest
