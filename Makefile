@@ -6,7 +6,7 @@ lint:
 	pipenv check ./app ./tests
 
 test: lint
-	pipenv run pytest
+	pipenv run pytest --cov-report term-missing --cov app --capture no
 
 start:
 	pipenv run python run.py
