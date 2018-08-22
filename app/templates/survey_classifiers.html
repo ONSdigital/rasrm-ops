@@ -1,20 +1,37 @@
 {% extends "base.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}">{{ survey.shortName }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Survey Selectors</li>
+{% endblock %}
 {% block main %}
 <h1>Create Survey Classifiers for {{ survey.shortName }}</h1>
 <p>This will create survey classifiers. Survey classifiers define what properties should be used to determine the
-    collection instrument or template to use</p>
-<form>
-    <label for="classifier_type">Classifier</label>
-    <select id="classifier_type" name="classifier_type">
-        {% for item in classifier_types %}
-        <option value="{{ item }}">{{ item }}</option>
+    collection
+    instrument or template to use</p>
+<div class="row">
+    <form class="col-4">
+        <div class="form-group">
+            <label for="classifier_type">Classifier</label>
+            <select class="form-control" id="classifier_type" name="classifier_type">
+                {% for item in classifier_types %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% for item in classifiers %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}">
+                </div>
+            </div>
+            <label for="{{ item }}" class="form-control">{{ item }}</label>
+        </div>
         {% endfor %}
-    </select><br>
-    {% for item in classifiers %}
-    <label for="{{ item }}">{{ item }}</label>
-    <input type="checkbox" id="{{ item }}" name="{{ item }}" value="{{ item }}"><br>
-    {% endfor %}
-    <input type="submit" value="Submit" formmethod="post">
-</form>
-<a href="/survey/{{ survey_id }}">Back</a>
+        <div class="form-group">
+            <input class="form-control" type="submit" value="Submit" formmethod="post">
+        </div>
+    </form>
+</div>
 {% endblock %}

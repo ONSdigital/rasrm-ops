@@ -1,24 +1,41 @@
-{% extends "base.html" %}
-{% block main %}
-<h1>{{ survey.longName }}</h1>
-<div>
-    <h3>Collection Exercise</h3>
-    {% for item in collection_exercises %}
-    <a href="/survey/{{ survey_id }}/collection/{{ item.id }}">{{ item.userDescription }}</a><br>
-    {% endfor %}
-</div><br>
-<div>
-    <a href="/survey/{{ survey_id }}/classifiers">Create Survey Classifiers</a>
+{% extends "base.html" %} {% block breadcrumb %}
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ survey.shortName }}</li>
+{% endblock %} {% block main %}
+<div class="row">
+    <div class="offset-1 col-5">
+        <h3>Collection Exercise</h3>
+        {% if not collection_exercises %}
+        <p>No collection exercises.</p>
+        {% endif %} {% for item in collection_exercises %}
+        <ul class="list-group">
+            <a class="list-group-item survey-list" href="/survey/{{ survey_id }}/collection/{{ item.id }}">{{ item.userDescription
+                }}
+            </a>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="col-5">
+        <h3>Create a collection exercise</h3>
+        <form>
+            <div class="form-group">
+                <label for="period">Period</label>
+                <input class="form-control" type="number" id="period" name="period">
+            </div>
+            <div class="form-group">
+                <label for="period_description">Period Description</label>
+                <input class="form-control" type="text" id="period_description" name="period_description">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="submit" value="Save" formmethod="post">
+            </div>
+        </form>
+    </div>
 </div>
-<div>
-    <h3>Create a collection exercise</h3>
-    <form>
-        <label for="period">Period</label>
-        <input type="number" id="period" name="period"><br>
-        <label for="period_description">Period Description</label>
-        <input type="text" id="period_description" name="period_description"><br>
-        <input type="submit" value="Create" formmethod="post">
-    </form>
+
+<div class="row">
+    <div class="offset-2">
+        <a href="/survey/{{ survey_id }}/classifiers">Set Survey Classifiers</a>
+    </div>
 </div>
-<a href="/survey">Back</a>
 {% endblock %}

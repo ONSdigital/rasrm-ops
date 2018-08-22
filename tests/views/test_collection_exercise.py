@@ -1,6 +1,7 @@
 def test_get_collection_exercise_events_page(client, requests_mock):
     requests_mock.get('/collectionexercises/123', json={'state': 'READY_FOR_REVIEW'})
     requests_mock.get('/collectionexercises/123/events', json={})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123')
 
@@ -10,6 +11,7 @@ def test_get_collection_exercise_events_page(client, requests_mock):
 def test_get_collection_exercise_events_page_can_execute(client, requests_mock):
     requests_mock.get('/collectionexercises/123', json={'state': 'READY_FOR_REVIEW'})
     requests_mock.get('/collectionexercises/123/events', json={})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123')
 
@@ -20,6 +22,7 @@ def test_get_collection_exercise_events_page_can_execute(client, requests_mock):
 def test_get_collection_exercise_events_page_execute_disabled(client, requests_mock):
     requests_mock.get('/collectionexercises/123', json={'state': 'SOMETHING'})
     requests_mock.get('/collectionexercises/123/events', json={})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123')
 

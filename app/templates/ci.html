@@ -1,13 +1,31 @@
-{% extends "base.html" %}
-{% block main %}
-<h1>Create ci for {{ collection_exercise.userDescription }}</h1>
-<p>Select the values for this collection instrument. All values must be populated</p>
-<form action="ci">
-    {% for key, value in ci_classifiers.items() %}
-    <label for="{{ key }}">{{ key }}</label>
-    <input type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
-    {% endfor %}
-    <input type="submit" formmethod="post" name="ci_upload" value="Load collection instrument">
-</form>
-<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
+{% extends "base.html" %} {% block breadcrumb %}
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}">{{ survey.shortName }}</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}/collection/{{ collection_exercise.id }}">{{
+    collection_exercise.userDescription
+    }}
+</a></li>
+<li class="breadcrumb-item active" aria-current="page">Events</li>
+{% endblock %} {% block main %}
+<div class="offset-1 col-10">
+    <h1>Create CI for {{ collection_exercise.userDescription }}</h1>
+    <p>Select the values for this Collection Instrument. All values must be populated</p>
+    {% if not ci_classifiers %}
+    <p>No Collection Instrument selectors for survey</p>
+    {% endif %}
+    <div class="col-5">
+        <form action="ci">
+            {% for key, value in ci_classifiers.items() %}
+            <div class="form-group">
+                <label for="{{ key }}">{{ key }}</label>
+                <input class="form-control" type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <input class="form-control" type="submit" formmethod="post" name="ci_upload" value="Save" {% if not
+                       ci_classifiers %}disabled{% endif %}>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

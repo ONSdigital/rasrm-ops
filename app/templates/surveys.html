@@ -1,32 +1,55 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Home</li>
+{% endblock %}
+
 {% block main %}
-<h1>Surveys</h1>
-<p>This is a list of the surveys that have already been created</p>
-<div>
-        {% for item in surveys %}
-        <a href="/survey/{{ item.id }}">{{ item.longName }}</a><br>
-        {% endfor %}
-</div><br>
-<h2>Create a survey</h2>
-<form action="/survey">
-    <label for="survey_ref">Survey Ref</label>
-    <input type="number" id="survey_ref" name="survey_ref"><br>
-    <label for="short_name">Short Name</label>
-    <input type="text" id="short_name" name="short_name"><br>
-    <label for="long_name">Long Name</label>
-    <input type="text" id="long_name" name="long_name"><br>
-    <label for="legal_basis">Legal Basis</label>
-    <select id="legal_basis" name="legal_basis">
-        {% for item in legal_basis %}
-        <option value="{{ item }}">{{ item }}</option>
-        {% endfor %}
-    </select><br>
-    <label for="survey_type">Survey Type</label>
-    <select id="survey_type" name="survey_type">
-        {% for item in survey_types %}
-        <option value="{{ item }}">{{ item }}</option>
-        {% endfor %}
-    </select><br>
-    <input type="submit" value="Submit" formmethod="post">
-</form><br>
+<div class="row">
+    <div class="offset-1 col-6">
+        <h2>Surveys</h2>
+        <p>This is a list of the surveys that have already been created</p>
+        <ul class="list-group">
+            {% for item in surveys %}
+            <a class="list-group-item survey-list" href="/survey/{{ item.id }}">{{ item.longName }}</a>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-4">
+        <h2>Create a survey</h2>
+        <form action="/survey">
+            <div class="form-group">
+                <label for="survey_ref">Survey Ref</label>
+                <input class="form-control" type="number" id="survey_ref" name="survey_ref">
+            </div>
+            <div class="form-group">
+                <label for="short_name">Short Name</label>
+                <input class="form-control" type="text" id="short_name" name="short_name">
+            </div>
+            <div class="form-group">
+                <label for="long_name">Long Name</label>
+                <input class="form-control" type="text" id="long_name" name="long_name">
+            </div>
+            <div class="form-group">
+                <label for="legal_basis">Legal Basis</label>
+                <select class="form-control" id="legal_basis" name="legal_basis">
+                    {% for item in legal_basis %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="survey_type">Survey Type</label>
+                <select class="form-control" id="survey_type" name="survey_type">
+                    {% for item in survey_types %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="submit" value="Save" formmethod="post">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -5,6 +5,7 @@ from werkzeug.utils import redirect
 
 from app.auth import auth
 from app.views.collection_exercise import get_collection_exercise
+from app.views.survey import get_survey
 
 blueprint = Blueprint('sample', __name__, template_folder='templates')
 
@@ -13,8 +14,9 @@ blueprint = Blueprint('sample', __name__, template_folder='templates')
 @auth.login_required
 def get_sample(survey_id, collection_exercise_id):
     collection_exercise = get_collection_exercise(collection_exercise_id)
+    survey = get_survey(survey_id)
     return render_template('sample.html', collection_exercise=collection_exercise, survey_id=survey_id,
-                           collection_exercise_id=collection_exercise_id)
+                           collection_exercise_id=collection_exercise_id, survey=survey)
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/sample', methods=["POST"])

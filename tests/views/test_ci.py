@@ -1,6 +1,7 @@
 def test_get_ci_page(client, requests_mock):
     requests_mock.get('/collectionexercises/123', json={})
     requests_mock.get('/surveys/BRES/classifiertypeselectors', json={})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123/ci')
 
@@ -12,6 +13,7 @@ def test_get_ci_shows_all_selectors(client, requests_mock):
     requests_mock.get('/surveys/BRES/classifiertypeselectors', json=[{'name': 'COLLECTION_INSTRUMENT', 'id': '123'}])
     requests_mock.get('/surveys/BRES/classifiertypeselectors/123',
                       json={'classifierTypes': ['RU_REF', 'COLLECTION_EXERCISE_ID']})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123/ci')
 

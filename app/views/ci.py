@@ -8,6 +8,7 @@ from werkzeug.utils import redirect
 
 from app.auth import auth
 from app.views.collection_exercise import get_collection_exercise
+from app.views.survey import get_survey
 
 blueprint = Blueprint('ci', __name__, template_folder='templates')
 
@@ -18,8 +19,9 @@ def get_ci(survey_id, collection_exercise_id):
     if 'COLLECTION_EXERCISE' in classifiers:
         classifiers['COLLECTION_EXERCISE'] = collection_exercise_id
     collection_exercise = get_collection_exercise(collection_exercise_id)
+    survey = get_survey(survey_id)
     return render_template('ci.html', ci_classifiers=classifiers, collection_exercise=collection_exercise,
-                           survey_id=survey_id, collection_exercise_id=collection_exercise_id)
+                           survey_id=survey_id, collection_exercise_id=collection_exercise_id, survey=survey)
 
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/ci', methods=["POST"])

@@ -1,9 +1,11 @@
 import requests
 from flask import Blueprint, render_template, url_for, current_app as app, request
+from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
 from app.views.collection_exercise import get_collection_exercise
+from app.views.survey import get_survey
 from app.views.timestamp import convert_to_iso_timestamp
 
 blueprint = Blueprint('action_plan', __name__, template_folder='templates')
@@ -33,9 +35,10 @@ def get_action_plan(survey_id, collection_exercise_id):
     plans = [plan for plan in response.json() if
              plan_for_collection_exercise(plan, collection_exercise_id)]
     collection_exercise = get_collection_exercise(collection_exercise_id)
+    survey = get_survey(survey_id)
     return render_template('action.html', plans=plans, action_types=action_types,
                            collection_exercise=collection_exercise, survey_id=survey_id,
-                           collection_exercise_id=collection_exercise_id)
+                           collection_exercise_id=collection_exercise_id, survey=survey)
 
 
 def plan_for_collection_exercise(plan, collection_exercise_id):
@@ -46,7 +49,10 @@ def plan_for_collection_exercise(plan, collection_exercise_id):
 
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/actions', methods=["POST"])
 def create_action_plan(survey_id, collection_exercise_id):
-    timestamp = convert_to_iso_timestamp(request.form['timestamp'])
+    try:
+        timestamp = convert_to_iso_timestamp(request.form['timestamp'])
+    except ValueError:
+        abort(400)
     rule = {
         'actionPlanId': request.form['action_plan_id'],
         'actionTypeName': request.form['action_rule_type'],

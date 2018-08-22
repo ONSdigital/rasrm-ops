@@ -1,17 +1,30 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}">{{ survey.shortName }}</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}/collection/{{ collection_exercise.id }}">{{ collection_exercise.userDescription }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Events</li>
+{% endblock %}
 {% block main %}
+<div class="offset-1 col-10">
 <h1>Create collection exercise events for {{ collection_exercise.userDescription }}</h1>
 <p>Create events for a collection exercise. Mandatory events are: mps, go_live, return_by, exercise_end</p>
-<form>
-    <label for="event">Events</label>
-    <select id="event" name="event">
-        {% for item in events %}
-        <option value="{{ item }}">{{ item }}</option>
-        {% endfor %}
-    </select><br>
-    <label for="event_date">Date</label>
-    <input type="datetime-local" id="event_date" name="event_date"><br>
-    <input type="submit" value="Submit" formmethod="post">
+<form class="col-5">
+    <div class="form-group">
+        <label for="event">Events</label>
+        <select class="form-control" id="event" name="event">
+            {% for item in events %}
+            <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="event_date">Date</label>
+        <input class="form-control" type="datetime-local" id="event_date" name="event_date">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="submit" value="Submit" formmethod="post">
+    </div>
 </form>
-<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
+</div>
 {% endblock %}

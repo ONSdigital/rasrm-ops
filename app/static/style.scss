@@ -1,0 +1,79 @@
+$primary-color: #393939;
+$secondary-color: #DFDFE0;
+
+body {
+    font-family: 'ABeeZee', sans-serif;
+}
+
+body {
+    background-color: $primary-color;
+}
+
+p {
+    color: $secondary-color;
+}
+
+h1 {
+    color: $secondary-color;
+}
+
+h2 {
+    color: $secondary-color;
+}
+
+h3 {
+    color: $secondary-color;
+}
+
+h4 {
+    color: $secondary-color;
+}
+
+h5 {
+    color: $secondary-color;
+}
+
+h6 {
+    color: $secondary-color;
+}
+
+label {
+    color: $secondary-color;
+}
+
+a {
+    color: #A8B2CD;
+}
+
+a:hover {
+    color: #DDE6FC;
+}
+
+a:visited {
+    color: #636D88;
+}
+
+::selection {
+    color: black;
+    background: white;
+}
+
+.breadcrumb {
+    background: #262628;
+    color: white;
+}
+
+.breadcrumb a {
+    color: #878787;
+}
+
+.breadcrumb a:visited {
+    color: #878787;
+}
+
+.survey-list {
+    background: #4D4D4D;
+    height: 40px; 
+    padding: 10px 15px;
+    font-size: 16px;
+}
