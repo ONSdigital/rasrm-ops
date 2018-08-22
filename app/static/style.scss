@@ -1,5 +1,6 @@
 $primary-color: #393939;
 $secondary-color: #DFDFE0;
+$breadcrumb-link-color: #878787;
 
 body {
     font-family: 'ABeeZee', sans-serif;
@@ -64,11 +65,11 @@ a:visited {
 }
 
 .breadcrumb a {
-    color: #878787;
+    color: $breadcrumb-link-color;
 }
 
 .breadcrumb a:visited {
-    color: #878787;
+    color: $breadcrumb-link-color;
 }
 
 .survey-list {
