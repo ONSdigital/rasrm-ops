@@ -56,17 +56,17 @@ def test_create_ci_classifier_link_fails(client, requests_mock):
     assert response.status_code == 500
 
 
-def test_create_ci_classifier_link_fails(client, requests_mock):
+def test_create_ci_classifier_link_conflict(client, requests_mock):
     requests_mock.get('/surveys/BRES/classifiertypeselectors', json=[{'name': 'COLLECTION_INSTRUMENT', 'id': '123'}])
     requests_mock.get('/surveys/BRES/classifiertypeselectors/123',
                       json={'classifierTypes': ['COLLECTION_EXERCISE_ID']})
     requests_mock.post('/collection-instrument-api/1.0.2/upload')
     requests_mock.get('/collection-instrument-api/1.0.2/collectioninstrument', json=[{'id': 'ci_id'}])
-    requests_mock.post('/collection-instrument-api/1.0.2/link-exercise/ci_id/collex_id', status_code=500)
+    requests_mock.post('/collection-instrument-api/1.0.2/link-exercise/ci_id/collex_id', status_code=409)
 
     response = client.post('/survey/BRES/collection/collex_id/ci', data={'COLLECTION_EXERCISE_ID': 'collex_id'})
 
-    assert response.status_code == 500
+    assert response.status_code == 409
 
 
 def test_create_ci_classifier_no_collection_exercise_classifier(client, requests_mock):

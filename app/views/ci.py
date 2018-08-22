@@ -2,6 +2,7 @@ import json
 
 import requests
 from flask import render_template, Blueprint, url_for, request, current_app as app
+from requests import HTTPError
 from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
@@ -29,8 +30,14 @@ def create_ci(survey_id, collection_exercise_id):
     for key in survey_classifiers.keys():
         if key.lower() not in form_classifiers or not form_classifiers[key.lower()]:
             abort(400)
-    upload_eq_ci(survey_id, form_classifiers)
-    link_cis(collection_exercise_id)
+
+    try:
+        upload_eq_ci(survey_id, form_classifiers)
+        link_cis(collection_exercise_id)
+    except HTTPError as e:
+        if e.response.status_code == 409:
+            abort(409)
+        raise
     return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
                             collection_exercise_id=collection_exercise_id))
 

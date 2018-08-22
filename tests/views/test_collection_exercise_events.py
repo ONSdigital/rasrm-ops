@@ -37,6 +37,7 @@ def test_create_collection_exercise_events_no_event_data(client):
 
 
 def test_create_collection_exercise_events_invalid_tag(client):
-    response = client.post('/survey/BRES/collection/123/event', data={'event': 'invalid', 'event_date': '2010-01-02T01:01'})
+    response = client.post('/survey/BRES/collection/123/event',
+                           data={'event': 'invalid', 'event_date': '2010-01-02T01:01'})
 
     assert response.status_code == 400

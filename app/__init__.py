@@ -1,8 +1,7 @@
 import os
-
 from flask import Flask
 
-from app.views import surveys, survey_classifier, survey, collection_exercise_events, setup_blueprints
+from app.views import setup_blueprints
 
 
 def create_app(config_name=None):
