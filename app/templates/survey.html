@@ -3,19 +3,20 @@
 <li class="breadcrumb-item active" aria-current="page">{{ survey.shortName }}</li>
 {% endblock %} {% block main %}
 <div class="row">
-    <div class="offset-1 col-5">
+    <div class="col-8">
         <h3>Collection Exercise</h3>
         {% if not collection_exercises %}
         <p>No collection exercises.</p>
-        {% endif %} {% for item in collection_exercises %}
         <ul class="list-group">
-            <a class="list-group-item survey-list" href="/survey/{{ survey_id }}/collection/{{ item.id }}">{{ item.userDescription
+            {% endif %} {% for item in collection_exercises %}
+            <a class="list-group-item survey-list" href="/survey/{{ survey_id }}/collection/{{ item.id }}">{{
+                item.userDescription
                 }}
             </a>
+            {% endfor %}
         </ul>
-        {% endfor %}
     </div>
-    <div class="col-5">
+    <div class="col-4">
         <h3>Create a collection exercise</h3>
         <form>
             <div class="form-group">
@@ -32,9 +33,8 @@
         </form>
     </div>
 </div>
-
 <div class="row">
-    <div class="offset-2">
+    <div class="col">
         <a href="/survey/{{ survey_id }}/classifiers">Set Survey Classifiers</a>
     </div>
 </div>

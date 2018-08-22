@@ -7,25 +7,23 @@
 </a></li>
 <li class="breadcrumb-item active" aria-current="page">Events</li>
 {% endblock %} {% block main %}
-<div class="offset-1 col-10">
-    <h1>Create CI for {{ collection_exercise.userDescription }}</h1>
-    <p>Select the values for this Collection Instrument. All values must be populated</p>
-    {% if not ci_classifiers %}
-    <p>No Collection Instrument selectors for survey</p>
-    {% endif %}
-    <div class="col-5">
-        <form action="ci">
-            {% for key, value in ci_classifiers.items() %}
-            <div class="form-group">
-                <label for="{{ key }}">{{ key }}</label>
-                <input class="form-control" type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
-            </div>
-            {% endfor %}
-            <div class="form-group">
-                <input class="form-control" type="submit" formmethod="post" name="ci_upload" value="Save" {% if not
-                       ci_classifiers %}disabled{% endif %}>
-            </div>
-        </form>
-    </div>
+<h1>Create CI for {{ collection_exercise.userDescription }}</h1>
+<p>Select the values for this Collection Instrument. All values must be populated</p>
+{% if not ci_classifiers %}
+<p>No Collection Instrument selectors for survey</p>
+{% endif %}
+<div class="row">
+    <form action="ci" class="col-5">
+        {% for key, value in ci_classifiers.items() %}
+        <div class="form-group">
+            <label for="{{ key }}">{{ key }}</label>
+            <input class="form-control" type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            <input class="form-control" type="submit" formmethod="post" name="ci_upload" value="Save" {% if not
+                   ci_classifiers %}disabled{% endif %}>
+        </div>
+    </form>
 </div>
 {% endblock %}
