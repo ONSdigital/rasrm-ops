@@ -11,7 +11,7 @@ def env_path(environment):
 
 
 class Config:
-    PORT = os.getenv('PORT')  # This is not used in run.py which isn't used in cloudfoundry
+    PORT = os.getenv('PORT')  # This is *only* used in run.py which isn't used in cloudfoundry
     SERVICE_DOMAIN_SUFFIX = os.getenv("SERVICE_DOMAIN_SUFFIX")
     USERNAME = os.getenv("USERNAME")
     PASSWORD = os.getenv("PASSWORD")
