@@ -1,10 +1,26 @@
-{% extends "base.html" %}
-{% block main %}
-<h1>Upload a sample for {{ collection_exercise.userDescription }}</h1>
-<p>Upload a sample for the collection exercise. Invalid samples will not be displayed here</p>
-<form enctype="multipart/form-data">
-    <input type="file" name="sample" accept=".csv">
-    <input type="submit" formmethod="post" name="sample_upload" value="Load sample">
-</form>
-<a href="/survey/{{ survey_id }}/collection/{{ collection_exercise_id }}">Back</a>
+{% extends "base.html" %} {% block breadcrumb %}
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}">{{ survey.shortName }}</a></li>
+<li class="breadcrumb-item"><a href="/survey/{{ survey.id }}/collection/{{ collection_exercise.id }}">{{
+    collection_exercise.userDescription
+    }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Events</li>
+{% endblock %} {% block main %}
+<div class="row">
+    <div class="col">
+        <h1>Upload a sample for {{ collection_exercise.userDescription }}</h1>
+        <p>Upload a sample for the collection exercise. Invalid samples will not be displayed here</p>
+        <form enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" id="sample-upload" name="sample">
+                    <label class="custom-file-label" for="sample-upload">Upload sample file</label>
+                </div>
+                <div class="input-group-append">
+                    <input type="submit" class="input-group-text" value="Upload" formmethod="post">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

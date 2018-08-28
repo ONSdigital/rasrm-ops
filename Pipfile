@@ -11,6 +11,8 @@ requests-mock = "*"
 gunicorn = "*"
 flask-httpauth = "*"
 cfenv = "*"
+flask-assets = "*"
+pyscss = "*"
 
 [dev-packages]
 pytest = "*"

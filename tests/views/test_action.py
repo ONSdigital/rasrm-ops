@@ -1,6 +1,7 @@
 def test_get_action_rule_page(client, requests_mock):
     requests_mock.get('/collectionexercises/123', json={})
     requests_mock.get('/actionplans', json={})
+    requests_mock.get('/surveys/BRES', json={})
 
     response = client.get('/survey/BRES/collection/123/actions')
 
@@ -8,6 +9,7 @@ def test_get_action_rule_page(client, requests_mock):
 
 
 def test_get_action_rule_page_lists_action_plans(client, requests_mock):
+    requests_mock.get('/surveys/BRES', json={})
     requests_mock.get('/collectionexercises/123', json={})
     requests_mock.get('/actionplans', json=[{'name': 'Action plan 1', 'selectors': {'collectionExerciseId': '123'}}])
 
