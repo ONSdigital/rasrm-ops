@@ -25,7 +25,7 @@ def load_collection_exercise(survey_id, collection_exercise_id):
 @auth.login_required
 def execute_collection_exercise(survey_id, collection_exercise_id):
     collection_exercise = get_collection_exercise(collection_exercise_id)
-    if collection_exercise['state'] != 'READY_TO_REVIEW':
+    if collection_exercise['state'] != 'READY_FOR_REVIEW':
         abort(400)
 
     execute_response = requests.post(f"{app.config['COLLECTION_EXERCISE_SERVICE']}/collectionexerciseexecution/"

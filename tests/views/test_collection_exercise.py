@@ -31,7 +31,7 @@ def test_get_collection_exercise_events_page_execute_disabled(client, requests_m
 
 
 def test_execute_collection_exercise(client, requests_mock):
-    requests_mock.get('/collectionexercises/123', json={'state': 'READY_TO_REVIEW'})
+    requests_mock.get('/collectionexercises/123', json={'state': 'READY_FOR_REVIEW'})
     requests_mock.post('/collectionexerciseexecution/123')
 
     response = client.post('/survey/BRES/collection/123')
