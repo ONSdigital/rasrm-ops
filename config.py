@@ -5,8 +5,6 @@ cf_env = cfenv.AppEnv()
 
 
 def env_path(environment):
-    if environment == 'prod':
-        return ''
     return f"-{environment}"
 
 
@@ -19,12 +17,12 @@ class Config:
 
     if cf_env.app:
         ENVIRONMENT = cf_env.space
-        ACTION_SERVICE = f"http://actionsvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
-        COLLECTION_EXERCISE_SERVICE = f"http://collectionexercisesvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
-        COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument{env_path(ENVIRONMENT)}." \
+        ACTION_SERVICE = f"http://actionsvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+        COLLECTION_EXERCISE_SERVICE = f"http://collectionexercisesvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+        COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument-{ENVIRONMENT}." \
                                         f"{SERVICE_DOMAIN_SUFFIX}"
-        SAMPLE_SERVICE = f"http://samplesvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
-        SURVEY_SERVICE = f"http://surveysvc{env_path(ENVIRONMENT)}.{SERVICE_DOMAIN_SUFFIX}"
+        SAMPLE_SERVICE = f"http://samplesvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+        SURVEY_SERVICE = f"http://surveysvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
 
 
 class CIConfig(Config):
