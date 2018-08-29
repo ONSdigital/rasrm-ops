@@ -67,6 +67,8 @@ def get_ci_classifiers(survey_id):
         classifiers_for_id = get_ci_classifier(survey_id, classifier_id)
         for classifier in classifiers_for_id['classifierTypes']:
             classifiers[classifier] = ''
+    classifiers['EQ_ID'] = ''
+    classifiers['FORM_TYPE'] = ''
     return classifiers
 
 
