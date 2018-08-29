@@ -17,8 +17,8 @@ def get_survey_classifier(survey_id):
     survey = get_survey(survey_id)
     return render_template('survey_classifiers.html',
                            classifier_types=classifier_selector_types,
-                           classifiers=["COLLECTION_EXERCISE", "RU_REF", "REGION", "LEGAL_BASIS", "FORM_TYPE",
-                                        "SAMPLE_REF", "EQ_ID"], survey=survey, survey_id=survey_id)
+                           classifiers=["COLLECTION_EXERCISE", "RU_REF", "REGION", "LEGAL_BASIS", "SAMPLE_REF"],
+                           survey=survey, survey_id=survey_id)
 
 
 @blueprint.route('/survey/<survey_id>/classifiers', methods=["POST"])
