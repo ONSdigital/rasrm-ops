@@ -23,6 +23,7 @@ action_types = [
     "SOCIALREM",
     "SOCIALSNE",
     "SOCIALPRENOT",
+    "SOCIALICF"
 ]
 
 
