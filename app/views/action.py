@@ -68,7 +68,7 @@ def build_combined_action_data(action_plans):
     for action_plan in action_plans:
         action_rule_id = action_plan.get('id')
         action_rules = get_action_rules(action_rule_id)
-        action_rules = sorted(action_rules, key=lambda k: k['triggerDateTime'], reverse=True)
+        action_rules = sorted(action_rules, key=lambda k: k['triggerDateTime'])
         combined = {
             "action_plan": action_plan,
             "action_rules": action_rules
