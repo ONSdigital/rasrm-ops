@@ -4,6 +4,7 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
+from app.controllers.collection_exercise_controller import get_collection_exercise_events, get_collection_exercise
 from app.views.survey import get_survey
 
 blueprint = Blueprint('collection_exercise', __name__, template_folder='templates')
@@ -36,17 +37,3 @@ def execute_collection_exercise(survey_id, collection_exercise_id):
                             collection_exercise_id=collection_exercise_id))
 
 
-def get_collection_exercise_events(collection_exercise_id):
-    response = requests.get(
-        f"{app.config['COLLECTION_EXERCISE_SERVICE']}/collectionexercises/{collection_exercise_id}/events",
-        auth=app.config['BASIC_AUTH'])
-    response.raise_for_status()
-    return response.json()
-
-
-def get_collection_exercise(collection_exercise_id):
-    response = requests.get(
-        f"{app.config['COLLECTION_EXERCISE_SERVICE']}/collectionexercises/{collection_exercise_id}",
-        auth=app.config['BASIC_AUTH'])
-    response.raise_for_status()
-    return response.json()
