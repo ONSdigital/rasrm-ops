@@ -8,14 +8,17 @@ def test_get_action_rule_page(client, requests_mock):
     assert response.status_code == 200
 
 
-def test_get_action_rule_page_lists_action_plans(client, requests_mock):
+def test_get_action_rule_page_lists_action_plans_and_rules(client, requests_mock):
     requests_mock.get('/surveys/BRES', json={})
     requests_mock.get('/collectionexercises/123', json={})
-    requests_mock.get('/actionplans', json=[{'name': 'Action plan 1', 'selectors': {'collectionExerciseId': '123'}}])
+    requests_mock.get('/actionplans', json=[{'id': 123, 'name': 'Action plan 1',
+                                             'selectors': {'collectionExerciseId': '123'}}])
+    requests_mock.get('/actionrules/actionplan/123', json=[{'name': 'Action rule 1', 'triggerDateTime': '1'}])
 
     response = client.get('/survey/BRES/collection/123/actions')
 
     assert b'Action plan 1' in response.data
+    assert b'Action rule 1' in response.data
 
 
 def test_create_action_rule(client, requests_mock):
