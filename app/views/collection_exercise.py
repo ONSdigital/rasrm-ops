@@ -35,5 +35,3 @@ def execute_collection_exercise(survey_id, collection_exercise_id):
     execute_response.raise_for_status()
     return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
                             collection_exercise_id=collection_exercise_id))
-
-
