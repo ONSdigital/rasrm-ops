@@ -86,8 +86,7 @@ def link_cis(collection_exercise_id):
     for ci_id in ci_ids:
         link_response = requests.post(
             url=f"{app.config['COLLECTION_INSTRUMENT_SERVICE']}/collection-instrument-api/1.0.2/link-exercise/"
-                f"{ci_id}/{collection_exercise_id}",
-            auth=app.config['BASIC_AUTH'])
+                f"{ci_id}/{collection_exercise_id}", auth=app.config['BASIC_AUTH'])
         link_response.raise_for_status()
 
 
