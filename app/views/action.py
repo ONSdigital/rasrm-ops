@@ -34,11 +34,11 @@ def get_action_plan(survey_id, collection_exercise_id):
     action_plans = get_action_plans()
     collex_action_plans = [plan for plan in action_plans
                            if plan_for_collection_exercise(plan, collection_exercise_id)]
-    action_data = build_combined_action_data(collex_action_plans)
+    action_plan_data = build_combined_action_data(collex_action_plans)
 
     collection_exercise = get_collection_exercise(collection_exercise_id)
     survey = get_survey(survey_id)
-    return render_template('action.html', action_data=action_data, action_types=action_types,
+    return render_template('action.html', action_plan_data=action_plan_data, action_types=action_types,
                            collection_exercise=collection_exercise, survey=survey)
 
 
@@ -69,9 +69,6 @@ def build_combined_action_data(action_plans):
         action_rule_id = action_plan.get('id')
         action_rules = get_action_rules(action_rule_id)
         action_rules = sorted(action_rules, key=lambda k: k['triggerDateTime'])
-        combined = {
-            "action_plan": action_plan,
-            "action_rules": action_rules
-        }
-        action_data.append(combined)
+        action_plan['action_rules'] = action_rules
+        action_data.append(action_plan)
     return action_data

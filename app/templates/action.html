@@ -9,18 +9,18 @@
 {% endblock %} {% block main %}
 
 <h1>Current action plans</h1>
-{% if not action_data %}
+{% if not action_plan_data %}
   <p class="tab">No action plans have been added.</p>
 {% endif %}
-{% for action in action_data %}
+{% for action_plan in action_plan_data %}
   <div class="row">
     <div class="col">
-      <label><b>Action plan: </b>{{ action.action_plan.name }}</label>
+      <label><b>Action plan: </b>{{ action_plan.name }}</label>
       <br>
-      {% if not action.action_rules %}
+      {% if not action_plan.action_rules %}
         <label class="tab">No action rules have been added for this plan.</label>
       {% endif %}
-      {% for rule in action.action_rules %}
+      {% for rule in action_plan.action_rules %}
         <div class="row">
           <label class="tab"><b>{{ rule.name }}:</b> {{ rule.triggerDateTime }}</label>
         </div>
@@ -35,8 +35,8 @@
         <div class="form-group">
             <label for="action_plan_id">Action plan</label>
             <select class="form-control" id="action_plan_id" name="action_plan_id">
-                {% for action in action_data%}
-                <option value="{{ action.action_plan.id }}">{{ action.action_plan.name }}</option>
+                {% for action_plan in action_plan_data %}
+                <option value="{{ action_plan.id }}">{{ action_plan.name }}</option>
                 {% endfor %}
             </select>
         </div>
