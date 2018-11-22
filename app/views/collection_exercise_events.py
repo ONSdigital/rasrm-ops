@@ -4,7 +4,7 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
-from app.views.collection_exercise import get_collection_exercise
+from app.controllers.collection_exercise_controller import get_collection_exercise
 from app.views.survey import get_survey
 from app.views.timestamp import convert_to_iso_timestamp
 
