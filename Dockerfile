@@ -1,6 +1,6 @@
 FROM python:3.6-slim
 
-ENV APP_SETTINGS=DockerConfig
+ENV APP_SETTINGS=K8SDevelopmentConfig
 
 WORKDIR /app
 COPY . /app

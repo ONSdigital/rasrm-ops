@@ -1,5 +1,6 @@
-import cfenv
 import os
+
+import cfenv
 
 cf_env = cfenv.AppEnv()
 
@@ -20,7 +21,7 @@ class Config:
         ACTION_SERVICE = f"http://actionsvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
         COLLECTION_EXERCISE_SERVICE = f"http://collectionexercisesvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
         COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument-{ENVIRONMENT}." \
-                                        f"{SERVICE_DOMAIN_SUFFIX}"
+            f"{SERVICE_DOMAIN_SUFFIX}"
         SAMPLE_SERVICE = f"http://samplesvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
         SURVEY_SERVICE = f"http://surveysvc-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
 
@@ -34,6 +35,18 @@ class CIConfig(Config):
         COLLECTION_INSTRUMENT_SERVICE = f"http://ras-collection-instrument-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
         SAMPLE_SERVICE = f"http://rm-sample-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
         SURVEY_SERVICE = f"http://rm-survey-service-{ENVIRONMENT}.{SERVICE_DOMAIN_SUFFIX}"
+
+
+class K8SDevelopmentConfig(Config):
+    PORT = os.getenv("PORT", 80)
+    USERNAME = os.getenv('USERNAME', "admin")
+    PASSWORD = os.getenv('USERNAME', "secret")
+    BASIC_AUTH = ("admin", "secret")
+    ACTION_SERVICE = os.getenv('ACTION_SERVICE')
+    COLLECTION_EXERCISE_SERVICE = os.getenv('COLLECTION_EXERCISE_SERVICE')
+    COLLECTION_INSTRUMENT_SERVICE = os.getenv('COLLECTION_INSTRUMENT_SERVICE')
+    SAMPLE_SERVICE = os.getenv('SAMPLE_SERVICE')
+    SURVEY_SERVICE = os.getenv('SURVEY_SERVICE')
 
 
 class DevelopmentConfig(Config):
