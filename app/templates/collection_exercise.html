@@ -9,14 +9,6 @@
     <div class="col">
         <h2>{{ collection_exercise.userDescription }}</h2>
     </div>
-    <div class="col">
-        <form>
-            <input class="btn btn-light float-right" type="submit" formmethod="post" name="execute"
-                   value="Execute collection exercise"
-                   {%
-                   if not executable %}disabled{% endif %}>
-        </form>
-    </div>
 </div>
 <div class="row">
     <div class="col">

@@ -19,8 +19,8 @@ def index():
 @blueprint.route('/survey', methods=["GET"])
 @auth.login_required
 def get_survey():
-    return render_template('surveys.html', legal_basis=get_legal_basis(), survey_types=["Business", "Social"],
-                           surveys=get_surveys())
+    return render_template('surveys.html', legal_basis=get_legal_basis(), survey_types=["Social"],
+                           surveys=get_census_surveys())
 
 
 @blueprint.route('/survey', methods=['POST'])
@@ -47,7 +47,7 @@ def get_legal_basis():
     return legal_basis
 
 
-def get_surveys():
-    response = requests.get(f"{app.config['SURVEY_SERVICE']}/surveys", auth=app.config['BASIC_AUTH'])
+def get_census_surveys():
+    response = requests.get(f"{app.config['SURVEY_SERVICE']}/surveys/surveytype/Social", auth=app.config['BASIC_AUTH'])
     response.raise_for_status()
-    return response.json()
+    return response.json() if response.status_code == 200 else []

@@ -8,12 +8,16 @@
 <div class="row">
     <div class="col-8">
         <h2>Surveys</h2>
+        {% if surveys %}
         <p>This is a list of the surveys that have already been created</p>
         <ul class="list-group">
             {% for item in surveys %}
             <a class="list-group-item survey-list" href="/survey/{{ item.id }}">{{ item.longName }}</a>
             {% endfor %}
         </ul>
+        {% else %}
+        <p>No surveys have been created</p>
+        {% endif %}
     </div>
     <div class="col-4">
         <h2>Create a survey</h2>
