@@ -13,13 +13,6 @@ blueprint = Blueprint('action_plan', __name__, template_folder='templates')
 
 # Get this from an endpoint (That doesn't exist yet)
 action_types = [
-    "BSNOT",
-    "BSREM",
-    "BSSNE",
-    "BSNL",
-    "BSNE",
-    "BSRL",
-    "BSRE",
     "SOCIALNOT",
     "SOCIALREM",
     "SOCIALSNE",

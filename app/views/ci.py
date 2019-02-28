@@ -18,6 +18,8 @@ def get_ci(survey_id, collection_exercise_id):
     classifiers = get_ci_classifiers(survey_id)
     if 'COLLECTION_EXERCISE' in classifiers:
         classifiers['COLLECTION_EXERCISE'] = collection_exercise_id
+    if 'EQ_ID' in classifiers:
+        classifiers['EQ_ID'] = 'census'
     collection_exercise = get_collection_exercise(collection_exercise_id)
     survey = get_survey(survey_id)
     return render_template('ci.html', ci_classifiers=classifiers, collection_exercise=collection_exercise,
