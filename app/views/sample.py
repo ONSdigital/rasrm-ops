@@ -4,6 +4,9 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from app.auth import auth
+from app.controllers.action_controller import get_action_plans, plan_for_collection_exercise
+from app.scripts.sample_loader import sample_reader
+from app.views.ci import get_collection_instrument_ids
 from app.views.collection_exercise import get_collection_exercise
 from app.views.survey import get_survey
 
@@ -29,8 +32,16 @@ def upload_sample(survey_id, collection_exercise_id):
     if not survey_type:
         abort(400)
 
-    sample_summary_id = upload_sample_file(request.files['sample'], survey_type)
-    link_sample(collection_exercise_id, sample_summary_id)
+    action_plans = get_action_plans()
+    action_plan = [plan for plan in action_plans
+                           if plan_for_collection_exercise(plan, collection_exercise_id)]
+    action_plan_id = action_plan[0]['id']
+
+    collection_instrument_id = get_collection_instrument_ids(collection_exercise_id)[0]
+
+    sample_reader(request.files['sample'].filename, collection_exercise_id, action_plan_id, collection_instrument_id)
+    request.files['sample'].close()
+
     return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
                             collection_exercise_id=collection_exercise_id))
 

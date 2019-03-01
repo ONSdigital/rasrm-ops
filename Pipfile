@@ -13,6 +13,8 @@ flask-httpauth = "*"
 cfenv = "*"
 flask-assets = "*"
 pyscss = "*"
+pika = "*"
+redis = "*"
 
 [dev-packages]
 pytest = "*"
