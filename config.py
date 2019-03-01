@@ -58,6 +58,7 @@ class K8SDevelopmentConfig(Config):
     REDIS_PORT = os.getenv('REDIS_SERVICE_PORT')
     REDIS_DB = os.getenv('REDIS_DB')
 
+
 class DevelopmentConfig(Config):
     PORT = os.getenv("PORT", 8003)
     USERNAME = "admin"
@@ -68,6 +69,16 @@ class DevelopmentConfig(Config):
     COLLECTION_INSTRUMENT_SERVICE = 'http://localhost:8002'
     SAMPLE_SERVICE = 'http://localhost:8125'
     SURVEY_SERVICE = 'http://localhost:8080'
+    RABBITMQ_HOST = os.getenv('RABBITMQ_SERVICE_HOST', 'localhost')
+    RABBITMQ_PORT = os.getenv('RABBITMQ_SERVICE_PORT', '6672')
+    RABBITMQ_VHOST = os.getenv('RABBITMQ_VHOST', '/')
+    RABBITMQ_QUEUE = os.getenv('RABBITMQ_QUEUE', 'Case.CaseDelivery')
+    RABBITMQ_EXCHANGE = os.getenv('RABBITMQ_EXCHANGE', '')
+    RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'guest')
+    RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD', 'guest')
+    REDIS_HOST = os.getenv('REDIS_SERVICE_HOST', 'localhost')
+    REDIS_PORT = os.getenv('REDIS_SERVICE_PORT', '7379')
+    REDIS_DB = os.getenv('REDIS_DB', '0')
 
 
 class DockerConfig(DevelopmentConfig):
@@ -77,13 +88,13 @@ class DockerConfig(DevelopmentConfig):
     COLLECTION_INSTRUMENT_SERVICE = 'http://collection-instrument:8002'
     SAMPLE_SERVICE = 'http://sample:8125'
     SURVEY_SERVICE = 'http://survey:8080'
-    RABBITMQ_HOST = ('RABBITMQ_SERVICE_HOST', 'localhost')
-    RABBITMQ_PORT = ('RABBITMQ_SERVICE_PORT', '6672')
-    RABBITMQ_VHOST = ('RABBITMQ_VHOST', '/')
-    RABBITMQ_QUEUE = ('RABBITMQ_QUEUE', 'Case.CaseDelivery')
-    RABBITMQ_EXCHANGE = ('RABBITMQ_EXCHANGE', '')
-    RABBITMQ_USER = ('RABBITMQ_USER', 'guest')
-    RABBITMQ_PASSWORD = ('RABBITMQ_PASSWORD', 'guest')
-    REDIS_HOST = ('REDIS_SERVICE_HOST', 'localhost')
-    REDIS_PORT = ('REDIS_SERVICE_PORT', '7379')
-    REDIS_DB = ('REDIS_DB', '0')
+    RABBITMQ_HOST = os.getenv('RABBITMQ_SERVICE_HOST', 'localhost')
+    RABBITMQ_PORT = os.getenv('RABBITMQ_SERVICE_PORT', '6672')
+    RABBITMQ_VHOST = os.getenv('RABBITMQ_VHOST', '/')
+    RABBITMQ_QUEUE = os.getenv('RABBITMQ_QUEUE', 'Case.CaseDelivery')
+    RABBITMQ_EXCHANGE = os.getenv('RABBITMQ_EXCHANGE', '')
+    RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'guest')
+    RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD', 'guest')
+    REDIS_HOST = os.getenv('REDIS_SERVICE_HOST', 'localhost')
+    REDIS_PORT = os.getenv('REDIS_SERVICE_PORT', '7379')
+    REDIS_DB = os.getenv('REDIS_DB', '0')

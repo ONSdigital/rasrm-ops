@@ -5,7 +5,7 @@ from werkzeug.utils import redirect
 
 from app.auth import auth
 from app.controllers.action_controller import get_action_plans, plan_for_collection_exercise
-from app.scripts.sample_loader import sample_reader
+from app.scripts.sample_loader import SampleLoader
 from app.views.ci import get_collection_instrument_ids
 from app.views.collection_exercise import get_collection_exercise
 from app.views.survey import get_survey
@@ -39,8 +39,9 @@ def upload_sample(survey_id, collection_exercise_id):
 
     collection_instrument_id = get_collection_instrument_ids(collection_exercise_id)[0]
 
-    sample_reader(request.files['sample'].filename, collection_exercise_id, action_plan_id, collection_instrument_id)
-    request.files['sample'].close()
+    sample_file = request.files['sample'].filename
+    sample_loader = SampleLoader()
+    sample_loader.load_sample(sample_file, collection_exercise_id, action_plan_id, collection_instrument_id)
 
     return redirect(url_for('collection_exercise.load_collection_exercise', survey_id=survey_id,
                             collection_exercise_id=collection_exercise_id))
