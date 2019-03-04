@@ -34,7 +34,7 @@ def upload_sample(survey_id, collection_exercise_id):
 
     action_plans = get_action_plans()
     action_plan = [plan for plan in action_plans
-                           if plan_for_collection_exercise(plan, collection_exercise_id)]
+                   if plan_for_collection_exercise(plan, collection_exercise_id)]
     action_plan_id = action_plan[0]['id']
 
     collection_instrument_id = get_collection_instrument_ids(collection_exercise_id)[0]

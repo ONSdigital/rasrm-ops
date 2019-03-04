@@ -1,10 +1,7 @@
-import requests
-from flask import Blueprint, render_template, url_for, current_app as app
-from werkzeug.exceptions import abort
-from werkzeug.utils import redirect
+from flask import Blueprint, render_template
 
 from app.auth import auth
-from app.controllers.collection_exercise_controller import get_collection_exercise_events, get_collection_exercise
+from app.controllers.collection_exercise_controller import get_collection_exercise, get_collection_exercise_events
 from app.views.survey import get_survey
 
 blueprint = Blueprint('collection_exercise', __name__, template_folder='templates')
