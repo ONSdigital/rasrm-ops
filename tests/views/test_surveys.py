@@ -1,6 +1,7 @@
 def test_get_surveys(client, requests_mock):
     requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/legal-bases", json=[{"ref": "Vol"}])
-    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys", json=[{"longName": "BRES"}])
+    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys/surveytype/Social",
+                      json=[{"longName": "BRES"}])
 
     response = client.get('/survey')
 
@@ -10,7 +11,8 @@ def test_get_surveys(client, requests_mock):
 
 def test_get_surveys_no_legal_basis(client, requests_mock):
     requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/legal-bases", json=[])
-    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys", json=[{"longName": "BRES"}])
+    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys/surveytype/Social",
+                      json=[{"longName": "BRES"}])
 
     response = client.get('/survey')
 
@@ -20,7 +22,7 @@ def test_get_surveys_no_legal_basis(client, requests_mock):
 
 def test_get_surveys_no_surveys(client, requests_mock):
     requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/legal-bases", json=[{"ref": "Vol"}])
-    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys", json=[])
+    requests_mock.get(f"{client.application.config['SURVEY_SERVICE']}/surveys/surveytype/Social", json=[])
 
     response = client.get('/survey')
 
