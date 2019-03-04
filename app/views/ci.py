@@ -46,6 +46,7 @@ def create_ci(survey_id, collection_exercise_id):
                             collection_exercise_id=collection_exercise_id))
 
 
+# TODO: Move to controller
 def get_ci_classifier(survey_id, classifier_id):
     response = requests.get(
         url=f'{app.config["SURVEY_SERVICE"]}/surveys/{survey_id}/classifiertypeselectors/{classifier_id}',
@@ -54,6 +55,7 @@ def get_ci_classifier(survey_id, classifier_id):
     return response.json()
 
 
+# TODO: Move to controller
 def get_ci_classifiers(survey_id):
     response = requests.get(url=f'{app.config["SURVEY_SERVICE"]}/surveys/{survey_id}/classifiertypeselectors',
                             auth=app.config['BASIC_AUTH'])
@@ -74,6 +76,7 @@ def get_ci_classifiers(survey_id):
     return classifiers
 
 
+# TODO: Move to controller
 def upload_eq_ci(survey_id, ci_classifiers):
     classifiers = {'survey_id': survey_id,
                    'classifiers': json.dumps(ci_classifiers)}
@@ -83,6 +86,7 @@ def upload_eq_ci(survey_id, ci_classifiers):
     response.raise_for_status()
 
 
+# TODO: Move to controller
 def link_cis(collection_exercise_id):
     ci_ids = get_collection_instrument_ids(collection_exercise_id)
     for ci_id in ci_ids:
@@ -92,6 +96,7 @@ def link_cis(collection_exercise_id):
         link_response.raise_for_status()
 
 
+# TODO: Move to controller
 def get_collection_instrument_ids(collection_exercise_id):
     response = requests.get(
         f'{app.config["COLLECTION_INSTRUMENT_SERVICE"]}/collection-instrument-api/1.0.2/collectioninstrument?'

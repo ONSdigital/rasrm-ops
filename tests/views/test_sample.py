@@ -11,24 +11,19 @@ def get_upload_sample_page(client, requests_mock):
 
 def test_upload_social_sample_file(client, requests_mock):
     requests_mock.get('/surveys/123', json={'surveyType': 'Social'})
-    requests_mock.post('/samples/SOCIAL/fileupload', json={'id': '123'})
-    requests_mock.put('/collectionexercises/link/123')
-
-    requests_mock.get('/actionplans', json=[{'id': '123', 'selectors': {'collectionExerciseId': '123'}}])
+    requests_mock.get('/actionplans',
+                      json=[{'id': 'action_plan_id', 'selectors': {'collectionExerciseId': 'collex_id'}}])
     requests_mock.get(
-        '/collection-instrument-api/1.0.2/collectioninstrument?searchString={"collection_exercise":"123"}',
-        json=[{"id": "123"}]
+        '/collection-instrument-api/1.0.2/collectioninstrument?searchString={"collection_exercise":"collex_id"}',
+        json=[{"id": "collection_instrument_id"}]
     )
-    #
 
-    with patch('app.views.sample.SampleLoader.load_sample') as sample_loader_mock:
-        response = client.post('/survey/123/collection/123/sample', data={
-            'sample': (BytesIO(b'my file contents'), 'sample.csv'),
-        })
+    with patch('app.views.sample.SampleLoader') as sample_loader_mock:
+        client.post('/survey/123/collection/collex_id/sample',
+                    data={'sample': (BytesIO(b'my file contents'), 'sample.csv')})
 
-        sample_loader_mock.assert_called_once_with("sample.csv", '123', '123', '123')
-
-        assert response.status_code == 302
+    load_sample_call = sample_loader_mock.return_value.load_sample
+    load_sample_call.assert_called_once_with('sample.csv', 'collex_id', 'action_plan_id', 'collection_instrument_id')
 
 
 def test_upload_social_sample_file_fails(client, requests_mock):

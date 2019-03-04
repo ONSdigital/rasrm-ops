@@ -25,7 +25,7 @@ def get_sample(survey_id, collection_exercise_id):
 @blueprint.route('/survey/<survey_id>/collection/<collection_exercise_id>/sample', methods=["POST"])
 @auth.login_required
 def upload_sample(survey_id, collection_exercise_id):
-    # Check if collection exercise valid?
+    # TODO: Check if collection exercise valid here too?
     if 'sample' not in request.files:
         abort(400)
     survey_type = get_survey_type(survey_id)
@@ -37,6 +37,7 @@ def upload_sample(survey_id, collection_exercise_id):
                    if plan_for_collection_exercise(plan, collection_exercise_id)]
     action_plan_id = action_plan[0]['id']
 
+    # TODO: fail gracefully if instrument not loaded. Log something out and/or render a page with the error
     collection_instrument_id = get_collection_instrument_ids(collection_exercise_id)[0]
 
     sample_file = request.files['sample'].filename
