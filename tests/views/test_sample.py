@@ -17,14 +17,17 @@ def test_upload_social_sample_file(client, requests_mock):
         '/collection-instrument-api/1.0.2/collectioninstrument?searchString={"collection_exercise":"collex_id"}',
         json=[{"id": "collection_instrument_id"}]
     )
+    requests_mock.get('/collectionexercises/collex_id', json={'state': 'READY_FOR_REVIEW'})
+    requests_mock.get('/collectionexercises/collex_id/events', json={})
 
     with patch('app.views.sample.SampleLoader') as sample_loader_mock:
         response = client.post('/survey/123/collection/collex_id/sample',
-                   data={'sample': (BytesIO(b'my file contents'), 'sample.csv')})
+                               data={'sample': (BytesIO(b'my file contents'), 'sample.csv')},
+                               follow_redirects=True)
 
     load_sample_call = sample_loader_mock.return_value.load_sample
     load_sample_call.assert_called_once_with('sample.csv', 'collex_id', 'action_plan_id', 'collection_instrument_id')
-    assert response.status_code == 302
+    assert response.status_code == 200
 
 
 def test_upload_social_sample_file_fails(client, requests_mock):

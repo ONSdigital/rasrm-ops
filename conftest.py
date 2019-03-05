@@ -11,10 +11,10 @@ def client():
 
     old_open = client.open
 
-    def open_with_auth(args, **kwargs):
+    def open_with_auth(*args, **kwargs):
         kwargs['headers'] = kwargs.get('headers') or {}
         kwargs['headers']['Authorization'] = _basic_auth_str('admin', 'secret')
-        return old_open(args, **kwargs)
+        return old_open(*args, **kwargs)
     client.open = open_with_auth
 
     yield client
