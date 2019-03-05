@@ -2,8 +2,9 @@ from io import BytesIO
 from unittest.mock import patch
 
 
-def get_upload_sample_page(client, requests_mock):
-    requests_mock.get('/collectionexercises/123/events', json={})
+def test_get_upload_sample_page(client, requests_mock):
+    requests_mock.get('/collectionexercises/123', json={})
+    requests_mock.get('/surveys/BRES', json={'surveyType': 'Social'})
     response = client.get('/survey/BRES/collection/123/sample')
 
     assert response.status_code == 200
@@ -55,15 +56,5 @@ def test_upload_social_sample_file_link_fails(client, requests_mock):
 
 def test_no_sample_file_is_bad_request(client):
     response = client.post('/survey/BRES/collection/123/sample')
-
-    assert response.status_code == 400
-
-
-def test_upload_sample_file_for_unsupported_type(client, requests_mock):
-    requests_mock.get('/surveys/BRES', json={'surveyType': 'unsupported'})
-
-    response = client.post('/survey/BRES/collection/123/sample', data={
-        'sample': (BytesIO(b'my file contents'), 'sample.csv'),
-    })
 
     assert response.status_code == 400

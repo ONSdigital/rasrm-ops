@@ -48,6 +48,7 @@ def get_legal_basis():
 
 
 def get_census_surveys():
+    # Survey type is 'Social' for now until 'Census' type is used
     response = requests.get(f"{app.config['SURVEY_SERVICE']}/surveys/surveytype/Social", auth=app.config['BASIC_AUTH'])
     response.raise_for_status()
     return response.json() if response.status_code == 200 else []

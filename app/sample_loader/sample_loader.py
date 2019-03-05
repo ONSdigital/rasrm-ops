@@ -33,7 +33,7 @@ class SampleLoader:
 
         # load sampleunit message template
         self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(["./"]))
-        self.jinja_template = self.env.get_template("app/scripts/message_template.xml")
+        self.jinja_template = self.env.get_template("app/sample_loader/message_template.xml")
 
     def sample_reader(self, file_obj, ce_uuid, ap_uuid, ci_uuid):
         sampleunits = {}
