@@ -88,13 +88,13 @@ class DockerConfig(DevelopmentConfig):
     COLLECTION_INSTRUMENT_SERVICE = 'http://collection-instrument:8002'
     SAMPLE_SERVICE = 'http://sample:8125'
     SURVEY_SERVICE = 'http://survey:8080'
-    RABBITMQ_HOST = os.getenv('RABBITMQ_SERVICE_HOST', 'localhost')
-    RABBITMQ_PORT = os.getenv('RABBITMQ_SERVICE_PORT', '6672')
+    RABBITMQ_HOST = os.getenv('RABBITMQ_SERVICE_HOST', 'rabbitmq')
+    RABBITMQ_PORT = os.getenv('RABBITMQ_SERVICE_PORT', '5672')
     RABBITMQ_VHOST = os.getenv('RABBITMQ_VHOST', '/')
     RABBITMQ_QUEUE = os.getenv('RABBITMQ_QUEUE', 'Case.CaseDelivery')
     RABBITMQ_EXCHANGE = os.getenv('RABBITMQ_EXCHANGE', '')
     RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'guest')
     RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD', 'guest')
-    REDIS_HOST = os.getenv('REDIS_SERVICE_HOST', 'localhost')
-    REDIS_PORT = os.getenv('REDIS_SERVICE_PORT', '7379')
+    REDIS_HOST = os.getenv('REDIS_SERVICE_HOST', 'redis')
+    REDIS_PORT = os.getenv('REDIS_SERVICE_PORT', '6379')
     REDIS_DB = os.getenv('REDIS_DB', '0')
