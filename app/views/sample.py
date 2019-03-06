@@ -36,7 +36,8 @@ def upload_sample(survey_id, collection_exercise_id):
     # TODO: fail gracefully if instrument not loaded. Log something out and/or render a page with the error
     collection_instrument_id = get_collection_instrument_ids(collection_exercise_id)[0]
 
-    sample_file = request.files['sample'].filename
+    sample_file_in_bytes = request.files['sample'].stream
+    sample_file = (line.decode() for line in sample_file_in_bytes)
     sample_loader = SampleLoader()
     sample_loader.load_sample(sample_file, collection_exercise_id, action_plan_id, collection_instrument_id)
 
