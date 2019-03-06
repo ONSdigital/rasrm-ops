@@ -1,5 +1,5 @@
 from io import BytesIO
-from unittest.mock import patch
+from unittest.mock import patch, ANY
 
 
 def test_get_upload_sample_page(client, requests_mock):
@@ -23,11 +23,12 @@ def test_upload_social_sample_file(client, requests_mock):
 
     with patch('app.views.sample.SampleLoader') as sample_loader_mock:
         response = client.post('/survey/123/collection/collex_id/sample',
-                               data={'sample': (BytesIO(b'my file contents'), 'sample.csv')},
+                               data={'sample': (BytesIO(b'header\nline'), 'sample.csv')},
                                follow_redirects=True)
 
     load_sample_call = sample_loader_mock.return_value.load_sample
-    load_sample_call.assert_called_once_with('sample.csv', 'collex_id', 'action_plan_id', 'collection_instrument_id')
+    load_sample_call.assert_called_once_with(ANY, 'collex_id', 'action_plan_id', 'collection_instrument_id')
+
     assert response.status_code == 200
 
 
