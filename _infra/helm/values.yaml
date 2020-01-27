@@ -1,0 +1,18 @@
+replicaCount: 1
+
+env: "dev"
+
+service:
+  port: 8003
+
+uaa:
+  client_id: "test-ops-id"
+  client_secret: "super-secret"
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "256Mi"
+  limits:
+    cpu: "1000m"
+    memory: "512Mi"
