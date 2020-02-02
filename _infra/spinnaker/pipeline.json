@@ -1,0 +1,21 @@
+{
+  "schema": "v2",
+  "application": "ops",
+  "name": "ops",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://rasrmApplicationTemplate",
+    "type": "front50/pipelineTemplate"
+  },
+  "variables": {
+    "name": "ops",
+    "defaultHelmChart": "ops-0.1.0.tgz",
+    "helmChartMatcher": "ops-.*\\.tgz"
+  },
+  "exclude": [],
+  "triggers": [],
+  "parameters": [],
+  "notifications": [],
+  "description": "",
+  "stages": []
+}
