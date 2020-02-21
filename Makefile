@@ -16,3 +16,9 @@ docker: test
 
 docker-run: docker
 	docker run --network=rasrmdockerdev_default  -p 8003:80 sdcplatform/rasrm-ops:latest
+
+build-docker:
+	docker build .
+
+build-kubernetes:
+	docker build -f _infra/docker/Dockerfile .
