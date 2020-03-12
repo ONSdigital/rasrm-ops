@@ -19,6 +19,9 @@ resources:
   requests:
     memory: "128Mi"
 
+database:
+  managedRedis: false
+
 uaa:
   client_id: "test-ops-id"
   client_secret: "super-secret"
